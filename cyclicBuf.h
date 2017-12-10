@@ -9,6 +9,6 @@ struct chunk_t {
 
 struct cyclic_buffer {
   volatile uint64_t current_position;
-  volatile struct chunk_t BUFFER[1000];
+  volatile struct chunk_t arr[1000];
 };
 #endif
