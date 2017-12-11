@@ -8,12 +8,13 @@
 
 #include "cyclicBuf.h"
 #include "gen.h"
+#include "gen.c"
 
 int main() {
   int shmFd = shm_open("shared_buffer", O_RDONLY, 0); //file descriptor referring to the shared memory object only for reading
   if (shmFd == -1) {
     perror("Failed to open file");
-    return -1;
+    return shmFd;
   }
 
   struct cyclic_buffer* mem = mmap(NULL, sizeof(struct cyclic_buffer), PROT_READ, MAP_SHARED, shmFd, 0); //a pointer to the shared mapped area
@@ -27,7 +28,7 @@ int main() {
   while (1) {
     if (mem-> current_position == cur_pos)
       continue;
-    int64_t cur_seed = verify((void*)mem-> arr[cur_pos].arr);
+    int64_t cur_seed = verify((void*)mem-> twoDarr[cur_pos]);
     if (cur_seed == -1) {
       printf("Failed to verify");
       break;
