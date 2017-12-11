@@ -26,8 +26,10 @@ int main() {
   uint64_t cur_pos = 0 , prev_seed = 0;
   printf("Starting at %lu\n", cur_pos);
   while (1) {
-    if (mem-> current_position == cur_pos)
+    if (mem-> current_position == cur_pos){
+      sleep(1);//waits for the other p2
       continue;
+    }
     int64_t cur_seed = verify((void*)mem-> twoDarr[cur_pos]);
     if (cur_seed == -1 || prev_seed + 1 != cur_seed /*or || (prev_seed != 0 && prev_seed + 1 != cur_seed)*/) {
       printf("Failed to verify");
