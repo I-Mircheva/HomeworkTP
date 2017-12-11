@@ -23,16 +23,17 @@ int main() {
     return -1;
   }
 
-  uint64_t cur_pos = 0;
+  uint64_t cur_pos = 0 , prev_seed = 0;
   printf("Starting at %lu\n", cur_pos);
   while (1) {
     if (mem-> current_position == cur_pos)
       continue;
     int64_t cur_seed = verify((void*)mem-> twoDarr[cur_pos]);
-    if (cur_seed == -1 /*|| cur_seed != seed*/) {
+    if (cur_seed == -1 || prev_seed + 1 != cur_seed /*or || (prev_seed != 0 && prev_seed + 1 != cur_seed)*/) {
       printf("Failed to verify");
       break;
     }
+    prev_seed = cur_seed;
     printf("Verified at %lu with seed %lu\n", cur_pos, cur_seed);
     cur_pos++;
     cur_pos %= 1000;
