@@ -29,7 +29,7 @@ int main() {
     if (mem-> current_position == cur_pos)
       continue;
     int64_t cur_seed = verify((void*)mem-> twoDarr[cur_pos]);
-    if (cur_seed == -1) {
+    if (cur_seed == -1 /*|| cur_seed != seed*/) {
       printf("Failed to verify");
       break;
     }

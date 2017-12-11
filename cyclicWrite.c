@@ -25,7 +25,7 @@ int main() {
   }
 
   struct cyclic_buffer* mem = mmap(NULL, sizeof(struct cyclic_buffer), PROT_READ | PROT_WRITE, MAP_SHARED, shmFd, 0); //a pointer to the shared mapped area for read and write
-  if (mem == NULL) {
+  if (mem == MAP_FAILED) {
     perror("Failed to mmap");
     return -1;
   }
