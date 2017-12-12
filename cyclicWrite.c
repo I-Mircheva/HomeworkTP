@@ -36,7 +36,7 @@ int main() {
     generate((void*)mem-> twoDarr[mem->current_position], seed);
     seed++;
     mem->current_position++;
-    mem->current_position %= 1000;
+    // mem->current_position %= 1000;
   }
 
   return 0;
